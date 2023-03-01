@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/sticky-note.css">
+    <title>Sticky Note</title>
+</head>
+<body>
+    <div class="project-content">
+        <h1 class="project-heading">Sticky Note | Javascript Local Storage Project</h1>
+        <button id="OpenNoteAddModal" class="btn btn-add-note">Add Note</button>
+        <div id="allStickyNotes" class="content-sticky-note">
+           
+            
+            <p id="localStorageEmptyMessage">You have no notes. Add a note.</p>
+        </div>
+    </div>
+
+
+    <div id="noteAddModal">
+        <div class="noteAddModal">
+            <div class="modal-box">
+                <button id="closeModal">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <h2><span id="modalHeading"></span></h2>
+                <div id="selectedID">
+                    <div class="modal-input-items">
+                    <label class="modal-input-label">
+                            ID: <span id="noteId"></span>
+                    </label>
+                    </div>
+                </div>
+                <div class="modal-input-items">                   
+                    <label class="modal-input-label">
+                        Title:
+                    </label>
+                    <input class="modal-input" id="noteTitle" type="text">
+                </div>
+                <div class="modal-input-items">
+                    <label class="modal-input-label">
+                        Note:
+                    </label>
+                    <textarea id="noteText" cols="30" rows="10"></textarea>
+                </div>
+                <div class="modal-input-items">
+                    <label class="modal-input-label">
+                        Select Note Color:
+                    </label>
+                    <input id="noteColor" class="modal-input" value="#c0c054" type="color">
+                </div>
+
+                <div class="modal-input-items">
+                    <button id="btnSaveNote" class="modal-buttons">Save</button>
+                    <button id="btnUpdateNote" class="modal-buttons">Update</button>
+                </div>                    
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="js/project-common.js"></script>
+    <script src="js/sticky-note.js"></script>
+</body>
+</html>
