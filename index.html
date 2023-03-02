@@ -10,15 +10,19 @@
 </head>
 <body>
     <div class="project-content">
-        <h1 class="project-heading">Sticky Note | Javascript Local Storage Project</h1>
-        <button id="OpenNoteAddModal" class="btn btn-add-note">Add Note</button>
+        <div class="project-head">
+            <div>
+                <h1 class="project-heading">Sticky Note | Javascript Local Storage Project</h1>
+            </div>
+            <div class="project-head-actions">
+                <button id="OpenNoteAddModal" class="btn-project btn-add-note">Add Note</button>
+                <input id="searchNote" placeholder="Search Notes" type="text">
+            </div>
+        </div>
         <div id="allStickyNotes" class="content-sticky-note">
-           
-            
             <p id="localStorageEmptyMessage">You have no notes. Add a note.</p>
         </div>
     </div>
-
 
     <div id="noteAddModal">
         <div class="noteAddModal">

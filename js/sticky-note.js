@@ -22,12 +22,12 @@ $(document).ready(function(){
                 noteId = 1;
 
                 notes.push(         
-                {
-                    "id":noteId,
-                    "noteTitle":noteTitle,
-                    "noteText":noteText,
-                    "noteColor":noteColor
-                }
+                    {
+                        "id":noteId,
+                        "noteTitle":noteTitle,
+                        "noteText":noteText,
+                        "noteColor":noteColor
+                    }
                 );
                 noteJson ={
                     "notes" : notes
@@ -38,11 +38,14 @@ $(document).ready(function(){
                 noteJson = JSON.parse(localStorage.getItem("note_data"));
                 var lastIndexOfArray = noteJson.notes.length-1;
                 noteId = Number(noteJson.notes[lastIndexOfArray].id) + 1;
-                noteJson.notes.push({"id":noteId,
-                "noteTitle":noteTitle,
-                "noteText":noteText,
-                "noteColor":noteColor
-            });
+                noteJson.notes.push(
+                    {
+                        "id":noteId,
+                        "noteTitle":noteTitle,
+                        "noteText":noteText,
+                        "noteColor":noteColor
+                    }
+                );
             }
     
             localStorage.setItem("note_data", JSON.stringify(noteJson));
@@ -54,7 +57,7 @@ $(document).ready(function(){
     
     //delete note
     $(document).on("click",".btn-note-delete",function(){
-        if (confirm("Are you sure! want to delete?") == true) 
+        if (confirm("Are you sure, want to delete?") == true) 
         {
             var noteId = $(this).attr('data-noteId');
             var indexNumber;
@@ -164,14 +167,14 @@ function ShowUserData(){
     var totalNote = noteJson.notes.length;
     var stickyNoteAllItems = "";
     
-    if(localStorage.getItem("note_data") != null)
+    if(noteJson != null)
     {            
-        for(var i = 0; i < totalNote; i++)
+        for(var i = totalNote-1; i >= 0; i--)
         {
             stickyNoteAllItems += 
             `<div class="note-item" style="background: ${noteJson.notes[i].noteColor};">
-                <button data-noteId = "${noteJson.notes[i].id}" class="btn btn-note-delete"><i class="fa-solid fa-trash-can"></i></button>
-                <button data-noteId = "${noteJson.notes[i].id}" class="btn btn-note-edit"><i class="fa-solid fa-pen-to-square"></i></button>
+                <button data-noteId = "${noteJson.notes[i].id}" class="btn-project btn-note-delete"><i class="fa-solid fa-trash-can"></i></button>
+                <button data-noteId = "${noteJson.notes[i].id}" class="btn-project btn-note-edit"><i class="fa-solid fa-pen-to-square"></i></button>
                 <div><h3 class="noteTitle">${noteJson.notes[i].noteTitle}</h3></div>
                 <div class="mote-title-underline"></div>
                 <div class="note-body">
@@ -181,15 +184,11 @@ function ShowUserData(){
         }
         
         $("#allStickyNotes").html(stickyNoteAllItems);
-
-        if($("#allStickyNotes").text() == "")
-        {
-            $("#localStorageEmptyMessage").show(); 
-        }
-        else{
-            $("#localStorageEmptyMessage").hide(); 
-        }
-    }   
+    }
+    else
+    {
+        $("#localStorageEmptyMessage").show(); 
+    } 
 }
 
 function IsValidNoteInput(){
