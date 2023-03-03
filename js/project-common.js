@@ -60,6 +60,4 @@ function _cmnisValidEmail(email) {
   
     // Return true if the string length is valid
     return lengthIsValid;
-  }
-  
-  
+  }  

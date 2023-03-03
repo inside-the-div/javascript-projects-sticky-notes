@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
     if(localStorage.getItem("note_data") != null){
-        ShowUserData();    
+        ShowNoteData();    
    }
 
     $(document).on("click","#OpenNoteAddModal",OpenNoteAddModal);
@@ -50,7 +50,7 @@ $(document).ready(function(){
     
             localStorage.setItem("note_data", JSON.stringify(noteJson));
             
-            ShowUserData();
+            ShowNoteData();
             ClearNoteMSModal();
         }
     });
@@ -72,7 +72,7 @@ $(document).ready(function(){
             }
             noteJson.notes.splice(indexNumber, 1);
             localStorage.setItem("note_data", JSON.stringify(noteJson));
-            ShowUserData();
+            ShowNoteData();
         } 
     });
 
@@ -128,7 +128,7 @@ $(document).ready(function(){
 
                 localStorage.setItem("note_data", JSON.stringify(noteJson));
                 
-                ShowUserData();
+                ShowNoteData();
                 CloseNoteModal();
             } 
             else 
@@ -136,11 +136,48 @@ $(document).ready(function(){
                 CloseNoteModal();
             }
         }
-    }); 
+    });
+
+    $("#searchNote").keyup(function(){
+        var searchText = $("#searchNote").val();
+        searchText = searchText.replace(/\s{2,}/g, ' ').trim();
+        searchText = searchText.toLowerCase();
+        if(searchText == "")
+        {
+            ShowNoteData();
+        }
+        else
+        {
+            var noteJson = JSON.parse(localStorage.getItem("note_data"));
+            var totalNote = noteJson.notes.length;
+            var stickyNoteAllItems = "";
+            if(noteJson != null)
+            {            
+                for(var i = totalNote-1; i >= 0; i--)
+                {
+                    var noteTitle = noteJson.notes[i].noteTitle;
+                    noteTitle = noteTitle.toLowerCase();
+                    if(noteTitle.indexOf(searchText) > -1)
+                    {
+                        stickyNoteAllItems += 
+                        `<div class="note-item" style="background: ${noteJson.notes[i].noteColor};">
+                            <button data-noteId = "${noteJson.notes[i].id}" class="btn-project btn-note-delete"><i class="fa-solid fa-trash-can"></i></button>
+                            <button data-noteId = "${noteJson.notes[i].id}" class="btn-project btn-note-edit"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <div><h3 class="noteTitle">${noteJson.notes[i].noteTitle}</h3></div>
+                            <div class="mote-title-underline"></div>
+                            <div class="note-body">
+                                ${noteJson.notes[i].noteText}
+                            </div>
+                        </div>`;
+                    }
+                }
+            }
+            $("#allStickyNotes").html(stickyNoteAllItems);
+        }
+    });
 
 });
-
-
+//end jquery
 
 function OpenNoteAddModal(){
     $("#modalHeading").html("Add Note");
@@ -162,7 +199,7 @@ function ClearNoteMSModal(){
     _cmnRemoveAllErrorMessage();
 }
 
-function ShowUserData(){
+function ShowNoteData(){
     var noteJson = JSON.parse(localStorage.getItem("note_data"));
     var totalNote = noteJson.notes.length;
     var stickyNoteAllItems = "";
