@@ -137,7 +137,8 @@ $(document).ready(function(){
             }
         }
     });
-
+    
+    //Search note
     $("#searchNote").keyup(function(){
         var searchText = $("#searchNote").val();
         searchText = searchText.replace(/\s{2,}/g, ' ').trim();
